@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSwap — Learn by Teaching</title>
+  <link rel="icon" href="./images/user.png">
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('ss-theme') ||
+          (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <link rel="stylesheet" href="./css/style-1.css">
+</head>
+<body class="landing">
+
+  <!-- ============ FLOATING PILL HEADER ============ -->
+  <div class="header-wrapper" id="headerWrapper">
+    <header class="header-pill" id="header">
+      <a href="#" class="brand">
+        <span class="brand-logo"><i class="fas fa-arrows-rotate"></i></span>
+        Skill<span>Swap</span>
+      </a>
+
+      <nav class="nav-capsule">
+        <a href="#showcase" class="active">Home</a>
+        <a href="#features">Features</a>
+        <a href="#odyssey">How It Works</a>
+        <a href="#matrix">Skill Matrix</a>
+        <a href="#stories">Stories</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+        <button class="btn btn-outline-primary btn-sm" id="signInBtn">Sign In</button>
+        <button class="btn btn-primary btn-sm" id="getStartedBtn">Get Started</button>
+        <button class="menu-btn" id="mobileMenuBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </header>
+  </div>
+
+  <!-- Mobile Slide-out Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#showcase" class="mobile-nav-link"><span>Home</span><i class="fas fa-chevron-right"></i></a>
+    <a href="#features" class="mobile-nav-link"><span>Features</span><i class="fas fa-chevron-right"></i></a>
+    <a href="#odyssey" class="mobile-nav-link"><span>How It Works</span><i class="fas fa-chevron-right"></i></a>
+    <a href="#matrix" class="mobile-nav-link"><span>Skill Matrix</span><i class="fas fa-chevron-right"></i></a>
+    <a href="#stories" class="mobile-nav-link"><span>Stories</span><i class="fas fa-chevron-right"></i></a>
+    <a href="#contact" class="mobile-nav-link"><span>Contact</span><i class="fas fa-chevron-right"></i></a>
+    <div class="mobile-menu-actions">
+      <button class="btn btn-outline-primary" id="mobileSignInBtn">Sign In</button>
+      <button class="btn btn-primary" id="mobileGetStartedBtn">Get Started</button>
+    </div>
+  </div>
+
+  <!-- ============ HERO — PEER-TO-PEER SKILL EXCHANGE ============ -->
+  <section class="hero-stage-section" id="showcase">
+    <!-- Ambient Stage Lighting -->
+    <div class="stage-ambient-glow">
+      <div class="stage-glow-orb primary" id="ambientOrbPrimary"></div>
+      <div class="stage-glow-orb secondary" id="ambientOrbSecondary"></div>
+    </div>
+
+    <div class="container-wrap">
+      <div class="hero-main-container">
+        
+        <!-- Top Split Grid: Left Narrative & Right Skill Exchange Visual -->
+        <div class="hero-split-grid">
+          
+          <!-- LEFT SIDE: Hero Narrative -->
+          <div class="hero-narrative-col">
+            <div class="hero-eyebrow-badge">
+              <span class="eyebrow-dot"></span>
+              <span>PEER-TO-PEER SKILL EXCHANGE</span>
+            </div>
+
+            <h1 class="hero-main-title">
+              <span class="title-line-1">Learn what you want.</span>
+              <span class="title-line-2">Teach what you know.</span>
+            </h1>
+
+            <p class="hero-lead-text">
+              Skill Swap connects people who want to learn with people who already have the skill. Exchange knowledge, connect one-on-one, and learn together — completely free.
+            </p>
+
+            <div class="hero-action-buttons">
+              <a href="#matrix" class="btn btn-primary btn-lg hero-cta-btn" id="exploreSkillsBtn">
+                <i class="fas fa-compass"></i> Explore Skills
+              </a>
+              <button class="btn btn-outline-primary btn-lg hero-cta-btn open-auth-trigger" id="heroStartSwapBtn">
+                <i class="fas fa-arrow-right"></i> Get Started
+              </button>
+            </div>
+
+            <!-- Trust / Micro Proof Strip -->
+            <div class="hero-trust-strip">
+              <div class="trust-pill"><i class="fas fa-shield-halved"></i> 100% Free Peer Barter</div>
+              <div class="trust-divider"></div>
+              <div class="trust-pill"><i class="fas fa-video"></i> Direct 1-on-1 Sessions</div>
+              <div class="trust-divider"></div>
+              <div class="trust-pill"><i class="fas fa-user-check"></i> Verified Community</div>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE: SKILL EXCHANGE VISUAL -->
+          <div class="hero-exchange-col">
+            <div class="skill-exchange-card">
+              
+              <!-- Card Header -->
+              <div class="exchange-card-header">
+                <div class="match-live-indicator">
+                  <span class="live-dot-pulse"></span>
+                  <span class="match-badge-text">Live Peer Exchange</span>
+                </div>
+                <div class="exchange-rate-pill">
+                  <i class="fas fa-bolt"></i> 1:1 Reciprocal Match
+                </div>
+              </div>
+
+              <!-- Two People Cards & Reciprocal Exchange Flow -->
+              <div class="exchange-interactive-arena">
+                
+                <!-- PERSON A CARD -->
+                <div class="peer-profile-card peer-card-a">
+                  <div class="peer-avatar-wrap">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80" alt="Elena V." class="peer-avatar-img" id="partnerAvatarA">
+                    <span class="online-status-ring" title="Online now"></span>
+                  </div>
+                  <div class="peer-identity">
+                    <h3 class="peer-name">Elena V.</h3>
+                    <span class="peer-role">Software Engineer</span>
+                    <span class="peer-rating"><i class="fas fa-star"></i> 4.9 <small>(28 swaps)</small></span>
+                  </div>
+
+                  <div class="peer-skills-stack">
+                    <!-- Can Teach -->
+                    <div class="skill-trade-box teach-box">
+                      <span class="trade-box-tag teach-tag"><i class="fas fa-chalkboard-user"></i> Can Teach</span>
+                      <div class="skill-subject">
+                        <span class="skill-icon-badge python-bg"><i class="fa-brands fa-python"></i></span>
+                        <div class="skill-meta">
+                          <span class="skill-title">Python</span>
+                          <span class="skill-sub">Backend &amp; Logic</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Wants to Learn -->
+                    <div class="skill-trade-box learn-box">
+                      <span class="trade-box-tag learn-tag"><i class="fas fa-graduation-cap"></i> Wants to Learn</span>
+                      <div class="skill-subject">
+                        <span class="skill-icon-badge figma-bg"><i class="fa-brands fa-figma"></i></span>
+                        <div class="skill-meta">
+                          <span class="skill-title">UI/UX</span>
+                          <span class="skill-sub">Design Systems</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CENTRAL EXCHANGE BRIDGE -->
+                <div class="exchange-center-bridge">
+                  <!-- Flow Track Top: Python flowing A -> B -->
+                  <div class="flow-track track-right" title="Python knowledge shared with Person B">
+                    <span class="flow-pill-label">Python <i class="fas fa-arrow-right"></i></span>
+                    <div class="flow-line-glow right-pulse"></div>
+                  </div>
+
+                  <!-- Central Exchange Emblem -->
+                  <div class="exchange-core-emblem">
+                    <div class="core-icon-ring">
+                      <i class="fas fa-right-left exchange-rotate-icon"></i>
+                    </div>
+                    <span class="core-title">SKILL EXCHANGE</span>
+                    <span class="core-badge">100% Match</span>
+                  </div>
+
+                  <!-- Flow Track Bottom: UI/UX flowing B -> A -->
+                  <div class="flow-track track-left" title="UI/UX knowledge shared with Person A">
+                    <span class="flow-pill-label"><i class="fas fa-arrow-left"></i> UI/UX</span>
+                    <div class="flow-line-glow left-pulse"></div>
+                  </div>
+                </div>
+
+                <!-- PERSON B CARD -->
+                <div class="peer-profile-card peer-card-b">
+                  <div class="peer-avatar-wrap">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80" alt="Marcus T." class="peer-avatar-img" id="partnerAvatarB">
+                    <span class="online-status-ring" title="Online now"></span>
+                  </div>
+                  <div class="peer-identity">
+                    <h3 class="peer-name">Marcus T.</h3>
+                    <span class="peer-role">Product Designer</span>
+                    <span class="peer-rating"><i class="fas fa-star"></i> 5.0 <small>(34 swaps)</small></span>
+                  </div>
+
+                  <div class="peer-skills-stack">
+                    <!-- Can Teach -->
+                    <div class="skill-trade-box teach-box">
+                      <span class="trade-box-tag teach-tag"><i class="fas fa-chalkboard-user"></i> Can Teach</span>
+                      <div class="skill-subject">
+                        <span class="skill-icon-badge figma-bg"><i class="fa-brands fa-figma"></i></span>
+                        <div class="skill-meta">
+                          <span class="skill-title">UI/UX</span>
+                          <span class="skill-sub">Figma &amp; Systems</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Wants to Learn -->
+                    <div class="skill-trade-box learn-box">
+                      <span class="trade-box-tag learn-tag"><i class="fas fa-graduation-cap"></i> Wants to Learn</span>
+                      <div class="skill-subject">
+                        <span class="skill-icon-badge python-bg"><i class="fa-brands fa-python"></i></span>
+                        <div class="skill-meta">
+                          <span class="skill-title">Python</span>
+                          <span class="skill-sub">Automation &amp; AI</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Card Footer Session Tools -->
+              <div class="exchange-card-footer">
+                <div class="exchange-features-list">
+                  <span class="ex-feature"><i class="fas fa-video"></i> HD WebRTC</span>
+                  <span class="ex-feature"><i class="fas fa-desktop"></i> Screen Share</span>
+                  <span class="ex-feature"><i class="fas fa-comments"></i> In-Call Chat</span>
+                </div>
+                <div class="exchange-zero-cost">
+                  <span class="cost-tag">$0 Free</span>
+                  <span class="cost-strike">$180 Value</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BOTTOM OF HERO: 4-STEP PROCESS -->
+        <div class="hero-process-strip">
+          
+          <!-- Step 1: CONNECT -->
+          <div class="hero-step-card">
+            <div class="step-num-badge">01</div>
+            <div class="step-icon-wrap">
+              <i class="fas fa-users-viewfinder"></i>
+            </div>
+            <div class="step-body">
+              <h4 class="step-title">CONNECT</h4>
+              <p class="step-desc">Find people with skills you need or skills you have.</p>
+            </div>
+          </div>
+
+          <div class="step-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <!-- Step 2: EXCHANGE -->
+          <div class="hero-step-card">
+            <div class="step-num-badge">02</div>
+            <div class="step-icon-wrap">
+              <i class="fas fa-arrows-rotate"></i>
+            </div>
+            <div class="step-body">
+              <h4 class="step-title">EXCHANGE</h4>
+              <p class="step-desc">Request a skill swap and get connected.</p>
+            </div>
+          </div>
+
+          <div class="step-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <!-- Step 3: LEARN -->
+          <div class="hero-step-card">
+            <div class="step-num-badge">03</div>
+            <div class="step-icon-wrap">
+              <i class="fas fa-video"></i>
+            </div>
+            <div class="step-body">
+              <h4 class="step-title">LEARN</h4>
+              <p class="step-desc">Meet, learn and share through video calls, chat &amp; files.</p>
+            </div>
+          </div>
+
+          <div class="step-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+
+          <!-- Step 4: GROW -->
+          <div class="hero-step-card">
+            <div class="step-num-badge">04</div>
+            <div class="step-icon-wrap">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="step-body">
+              <h4 class="step-title">GROW</h4>
+              <p class="step-desc">Build new skills, new connections, new you.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 2: LIVE VALUE TICKER RIBBON ============ -->
+  <section class="ticker-ribbon-section" id="ticker">
+    <div class="ticker-track">
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Liam C.</strong> traded Rust ⇄ <strong>Chloe B.</strong> Blender 3D</div>
+      <div class="ticker-item"><span class="trade-badge">SESSION LIVE</span> <strong>Sofia R.</strong> French ⇄ <strong>Julian M.</strong> Jazz Improvisation</div>
+      <div class="ticker-item"><span class="trade-badge">COMPLETED</span> <strong>Kenji T.</strong> Architectural Photo ⇄ <strong>Maya S.</strong> Product Growth</div>
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Priya S.</strong> Data Analytics ⇄ <strong>Mateo G.</strong> Spanish Fluency</div>
+      <div class="ticker-item"><span class="trade-badge">SESSION LIVE</span> <strong>David K.</strong> Machine Learning ⇄ <strong>Elena V.</strong> UI/UX Wireframing</div>
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Amara N.</strong> Classical Piano ⇄ <strong>Lucas H.</strong> Full-Stack React</div>
+      <!-- Duplicate for seamless infinite loop -->
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Liam C.</strong> traded Rust ⇄ <strong>Chloe B.</strong> Blender 3D</div>
+      <div class="ticker-item"><span class="trade-badge">SESSION LIVE</span> <strong>Sofia R.</strong> French ⇄ <strong>Julian M.</strong> Jazz Improvisation</div>
+      <div class="ticker-item"><span class="trade-badge">COMPLETED</span> <strong>Kenji T.</strong> Architectural Photo ⇄ <strong>Maya S.</strong> Product Growth</div>
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Priya S.</strong> Data Analytics ⇄ <strong>Mateo G.</strong> Spanish Fluency</div>
+      <div class="ticker-item"><span class="trade-badge">SESSION LIVE</span> <strong>David K.</strong> Machine Learning ⇄ <strong>Elena V.</strong> UI/UX Wireframing</div>
+      <div class="ticker-item"><span class="trade-badge">MATCHED</span> <strong>Amara N.</strong> Classical Piano ⇄ <strong>Lucas H.</strong> Full-Stack React</div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION: FEATURES GRID (all visible) ============ -->
+  <section class="features-grid-section" id="features">
+    <div class="container-wrap">
+      <div class="features-head reveal">
+        <span class="section-tag">Everything included</span>
+        <h2 class="section-title">One platform, every tool to swap skills</h2>
+        <p class="section-sub">No paywalls. Real features that power authentic peer-to-peer learning — from first match to completed session.</p>
+      </div>
+
+      <div class="features-grid stagger">
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-video"></i></span>
+          <h3>Live Video Calls</h3>
+          <p>In-browser HD WebRTC sessions with screen sharing, mic controls & fullscreen — zero plugins.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-comments"></i></span>
+          <h3>Real-Time Messaging</h3>
+          <p>Instant Socket.io chat with unread badges. Enter to send, Shift+Enter for a new line.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-paperclip"></i></span>
+          <h3>File &amp; Image Sharing</h3>
+          <p>Send code snippets, documents and images right inside the conversation.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-circle-nodes"></i></span>
+          <h3>Skill Matching</h3>
+          <p>Get paired with peers whose offered skills line up with what you want to learn.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-user-group"></i></span>
+          <h3>Connections &amp; Requests</h3>
+          <p>Send, accept, reject or cancel skill-swap requests and grow your learning circle.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-wand-magic-sparkles"></i></span>
+          <h3>Smart Recommendations</h3>
+          <p>Discover partners tailored to your goals, plus skills you may want to learn next.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-id-card"></i></span>
+          <h3>Rich Profiles</h3>
+          <p>Skills offered &amp; wanted with levels, categories, availability and social links.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-layer-group"></i></span>
+          <h3>Skill Categories</h3>
+          <p>Browse by domain — programming, design, music, languages, business and more.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-clock-rotate-left"></i></span>
+          <h3>Swap History</h3>
+          <p>Track completed exchanges so your learning journey is always visible.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-shield-halved"></i></span>
+          <h3>OTP-Verified Trust</h3>
+          <p>Every member verifies their email with a one-time code — no anonymous spam.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-gauge-high"></i></span>
+          <h3>Personal Dashboard</h3>
+          <p>Your connections, ongoing swaps, recent chats and recommendations in one view.</p>
+        </article>
+        <article class="feature-card">
+          <span class="feature-ico"><i class="fas fa-circle-half-stroke"></i></span>
+          <h3>Light &amp; Dark Mode</h3>
+          <p>A polished, responsive experience that remembers your preferred theme.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 3: THE INTERACTIVE PRODUCT LABORATORY ============ -->
+  <section class="lab-section" id="lab">
+    <div class="container-wrap">
+      
+      <div class="lab-head">
+        <span class="lab-tag"><i class="fas fa-microchip"></i> See it in action</span>
+        <h2 class="lab-title">Take the core tools for a spin</h2>
+        <p class="lab-subtitle">A closer, interactive look at the video, chat, and matching experience that powers every swap.</p>
+      </div>
+
+      <!-- Lab Tab Navigation Pills -->
+      <div class="lab-nav-pills" id="labNavPills">
+        <button class="lab-nav-btn active" data-tab="video"><i class="fas fa-video"></i> Live Video Classrooms</button>
+        <button class="lab-nav-btn" data-tab="chat"><i class="fas fa-comments"></i> Real-time Multimedia Chat</button>
+        <button class="lab-nav-btn" data-tab="match"><i class="fas fa-circle-nodes"></i> Symmetric Peer Matcher</button>
+        <button class="lab-nav-btn" data-tab="trust"><i class="fas fa-shield-halved"></i> Verified Credibility</button>
+      </div>
+
+      <!-- Lab Display Canvas -->
+      <div class="lab-viewport-card">
+        
+        <!-- Tab 1: Live Video Classrooms -->
+        <div class="lab-pane active" id="pane-video">
+          <div class="lab-video-preview">
+            <div class="lab-video-frame">
+              <img src="./images/video_session_preview.jpg" alt="Video session preview">
+              <div class="lab-video-interactive-dock">
+                <button class="lab-dock-btn active-control" id="demoMuteBtn" title="Toggle Mic"><i class="fas fa-microphone"></i></button>
+                <button class="lab-dock-btn" id="demoCamBtn" title="Toggle Cam"><i class="fas fa-video"></i></button>
+                <button class="lab-dock-btn" id="demoShareBtn" title="Screen Share"><i class="fas fa-desktop"></i></button>
+                <button class="lab-dock-btn end-control" id="demoEndBtn" title="End Call"><i class="fas fa-phone-slash"></i></button>
+              </div>
+            </div>
+            <div class="lab-video-sidebar">
+              <span class="lab-feature-pill">WebRTC Classroom</span>
+              <h3 class="lab-feature-title">High-Definition 1:1 Video Sessions</h3>
+              <p class="lab-feature-desc">Meet right inside the browser without third-party software. Built with low-latency WebRTC signaling, high-fidelity audio, and crisp screen sharing.</p>
+              <ul class="lab-feature-bullets">
+                <li><i class="fas fa-check"></i> In-browser WebRTC with zero plugins</li>
+                <li><i class="fas fa-check"></i> Low-latency screen sharing for code &amp; design reviews</li>
+                <li><i class="fas fa-check"></i> Picture-in-picture draggable self view</li>
+                <li><i class="fas fa-check"></i> Session timer to guarantee fair 50/50 time trades</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Multimedia Chat -->
+        <div class="lab-pane" id="pane-chat">
+          <div class="lab-chat-preview">
+            <div class="lab-chat-info">
+              <span class="lab-feature-pill">Real-time Messaging</span>
+              <h3 class="lab-feature-title">Organized Communication &amp; Media</h3>
+              <p class="lab-feature-desc">Plan agendas, share Figma links, upload code snippets, and coordinate swap sessions seamlessly before hopping into live video.</p>
+              <ul class="lab-feature-bullets">
+                <li><i class="fas fa-check"></i> Socket.io instant messaging with read receipts</li>
+                <li><i class="fas fa-check"></i> Drag-and-drop file, image, and attachment sharing</li>
+                <li><i class="fas fa-check"></i> Dedicated swap agreement card pinned to header</li>
+                <li><i class="fas fa-check"></i> Enter to send, Shift+Enter for clean formatting</li>
+              </ul>
+            </div>
+            <div class="lab-chat-screen">
+              <div class="mock-chat-header">
+                <div class="mock-chat-user">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80" alt="Ananya">
+                  <div>
+                    <strong style="color:var(--text-strong); font-size:0.95rem;">Ananya Roy</strong>
+                    <small style="display:block; color:var(--muted); font-size:0.75rem;">Teaching Design • Learning Python</small>
+                  </div>
+                </div>
+                <span class="badge bg-success"><span class="live-indicator-dot"></span> Connected</span>
+              </div>
+              <div class="mock-chat-body">
+                <div class="mock-msg them">
+                  Hey! I reviewed your design system Figma file. Let's cover typography tokens in today's 45-min swap!
+                </div>
+                <div class="mock-msg me">
+                  Sounds great! In exchange, I've prepared the Python API authentication script we can walk through right after.
+                  <div class="mock-msg-pill"><i class="fas fa-file-code"></i> auth_service.py (4.2 KB)</div>
+                </div>
+                <div class="mock-msg them">
+                  Perfect! Ready whenever you are. Let's start the video call.
+                </div>
+              </div>
+              <div class="mock-chat-input-bar">
+                <i class="fas fa-paperclip" style="color:var(--muted); cursor:pointer;"></i>
+                <input type="text" id="mockInput" placeholder="Try typing a message..." value="Joining the video room now!">
+                <button class="mock-send-btn" id="mockSendBtn"><i class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Symmetric Match Simulator -->
+        <div class="lab-pane" id="pane-match">
+          <div class="lab-match-preview">
+            <div class="match-sim-card">
+              <span class="lab-feature-pill">Match Engine</span>
+              <h3 class="lab-feature-title">Test the Symmetric Matching Algorithm</h3>
+              <p class="lab-feature-desc">Our matching engine pairs members whose offered skills directly intersect with each other's learning goals.</p>
+              
+              <div class="match-input-group">
+                <label>Skill You Can Teach</label>
+                <select class="match-select" id="simTeachSelect">
+                  <option value="Python">Python &amp; Backend Engineering</option>
+                  <option value="UI/UX" selected>UI/UX &amp; Product Design</option>
+                  <option value="Guitar">Acoustic &amp; Electric Guitar</option>
+                  <option value="Photography">Studio &amp; Portrait Photography</option>
+                  <option value="French">Conversational French</option>
+                </select>
+              </div>
+
+              <div class="match-input-group">
+                <label>Skill You Want to Learn</label>
+                <select class="match-select" id="simLearnSelect">
+                  <option value="Python" selected>Python &amp; Backend Engineering</option>
+                  <option value="UI/UX">UI/UX &amp; Product Design</option>
+                  <option value="Guitar">Acoustic &amp; Electric Guitar</option>
+                  <option value="Photography">Studio &amp; Portrait Photography</option>
+                  <option value="French">Conversational French</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary" id="runSimMatchBtn" style="margin-top:0.4rem;">
+                <i class="fas fa-wand-magic-sparkles"></i> Calculate Compatibility
+              </button>
+            </div>
+
+            <div class="match-result-card">
+              <div class="match-score-ring">
+                <span class="match-score-num" id="simScoreText">98%</span>
+              </div>
+              <h4 style="margin:0; font-size:1.15rem; color:var(--text-strong);">Mutual Synergy Score</h4>
+              <p style="color:var(--text-soft); font-size:0.88rem; max-width:280px; margin:0;">Both members offer high-level expertise required by the other.</p>
+
+              <div class="partner-match-card">
+                <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.6rem;">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Match" style="width:40px; height:40px; border-radius:50%;">
+                  <div>
+                    <strong style="display:block; font-size:0.92rem; color:var(--text-strong);" id="simPartnerName">Marcus T.</strong>
+                    <small style="color:var(--muted); font-size:0.75rem;">Verified Member • 4.9★</small>
+                  </div>
+                </div>
+                <div style="font-size:0.82rem; color:var(--text-soft); display:flex; flex-direction:column; gap:0.25rem;">
+                  <div><strong style="color:var(--accent-text);">Teaches:</strong> <span id="simPartnerTeaches">Python, FastAPI, Docker</span></div>
+                  <div><strong style="color:var(--text-strong);">Wants:</strong> <span id="simPartnerWants">UI/UX Design, Design Systems</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Verified Credibility -->
+        <div class="lab-pane" id="pane-trust">
+          <div class="lab-reputation-preview">
+            <div class="reputation-left">
+              <span class="lab-feature-pill">Safety &amp; Trust</span>
+              <h3 class="lab-feature-title">Verified Profiles, Zero Anonymous Spam</h3>
+              <p class="lab-feature-desc">Every member must verify their email address via OTP. Transparent peer ratings and session histories keep our learning environment productive and respectful.</p>
+              <ul class="lab-feature-bullets">
+                <li><i class="fas fa-check"></i> Cryptographically verified email verification (OTP)</li>
+                <li><i class="fas fa-check"></i> Post-session mutual reviews &amp; star ratings</li>
+                <li><i class="fas fa-check"></i> Community moderation and 1-click reporting</li>
+                <li><i class="fas fa-check"></i> Transparent swap counts tracked on public profiles</li>
+              </ul>
+            </div>
+            <div class="reputation-right">
+              <div class="rep-stat-card">
+                <i class="fas fa-envelope-circle-check"></i>
+                <h3>100%</h3>
+                <p>Email Verified Users</p>
+              </div>
+              <div class="rep-stat-card">
+                <i class="fas fa-star"></i>
+                <h3>4.96</h3>
+                <p>Average Session Score</p>
+              </div>
+              <div class="rep-stat-card">
+                <i class="fas fa-clock"></i>
+                <h3>94%</h3>
+                <p>On-time Session Arrival</p>
+              </div>
+              <div class="rep-stat-card">
+                <i class="fas fa-award"></i>
+                <h3>3,400+</h3>
+                <p>Endorsements Earned</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 4: THE 5-STAGE LEARNING ODYSSEY ============ -->
+  <section class="journey-section" id="odyssey">
+    <div class="container-wrap">
+      
+      <div class="journey-head">
+        <span class="section-tag">Learning Journey</span>
+        <h2 class="section-title">From first match to lifelong mastery</h2>
+        <p class="section-sub">A structured, reciprocal framework that ensures both partners gain immense practical value.</p>
+      </div>
+
+      <div class="journey-timeline-flow">
+        
+        <div class="journey-step-card">
+          <span class="step-seq-badge">01</span>
+          <h3>Inventory</h3>
+          <p>List the skills you have mastered and the skills you are hungry to learn, complete with experience tiers.</p>
+          <div class="step-indicator-bar"></div>
+        </div>
+
+        <div class="journey-step-card">
+          <span class="step-seq-badge">02</span>
+          <h3>Symmetric Match</h3>
+          <p>Our algorithm surfaces peers whose learning goals complement your teaching expertise directly.</p>
+          <div class="step-indicator-bar"></div>
+        </div>
+
+        <div class="journey-step-card">
+          <span class="step-seq-badge">03</span>
+          <h3>Handshake</h3>
+          <p>Connect over instant chat, establish session agendas, and agree on mutual milestones with zero friction.</p>
+          <div class="step-indicator-bar"></div>
+        </div>
+
+        <div class="journey-step-card">
+          <span class="step-seq-badge">04</span>
+          <h3>Live Sessions</h3>
+          <p>Hop into built-in HD video calls with screen sharing. Spend 30 mins learning, then 30 mins teaching.</p>
+          <div class="step-indicator-bar"></div>
+        </div>
+
+        <div class="journey-step-card">
+          <span class="step-seq-badge">05</span>
+          <h3>Endorsement</h3>
+          <p>Mark the swap complete, endorse each other's capabilities, and build your verified reputation ledger.</p>
+          <div class="step-indicator-bar"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 5: INTERACTIVE SKILL MATRIX ============ -->
+  <section class="matrix-section" id="matrix">
+    <div class="container-wrap">
+      
+      <div class="matrix-head">
+        <span class="section-tag">Explore Domains</span>
+        <h2 class="section-title">Browse the skill exchange universe</h2>
+        <p class="section-sub">Whatever discipline you wish to master, an active expert is waiting to learn from you.</p>
+      </div>
+
+      <div class="matrix-showcase-card">
+        
+        <!-- Category selector list -->
+        <div class="matrix-categories-list" id="matrixCategoryList">
+          <div class="matrix-cat-item active" data-cat="programming">
+            <div class="cat-item-left"><i class="fas fa-laptop-code"></i><span>Programming &amp; Tech</span></div>
+            <span class="cat-item-count">420+ Mentors</span>
+          </div>
+          <div class="matrix-cat-item" data-cat="design">
+            <div class="cat-item-left"><i class="fas fa-palette"></i><span>Design &amp; Creative</span></div>
+            <span class="cat-item-count">310+ Mentors</span>
+          </div>
+          <div class="matrix-cat-item" data-cat="music">
+            <div class="cat-item-left"><i class="fas fa-music"></i><span>Music &amp; Audio Arts</span></div>
+            <span class="cat-item-count">190+ Mentors</span>
+          </div>
+          <div class="matrix-cat-item" data-cat="photography">
+            <div class="cat-item-left"><i class="fas fa-camera"></i><span>Photography &amp; Video</span></div>
+            <span class="cat-item-count">140+ Mentors</span>
+          </div>
+          <div class="matrix-cat-item" data-cat="languages">
+            <div class="cat-item-left"><i class="fas fa-globe"></i><span>World Languages</span></div>
+            <span class="cat-item-count">260+ Mentors</span>
+          </div>
+          <div class="matrix-cat-item" data-cat="business">
+            <div class="cat-item-left"><i class="fas fa-briefcase"></i><span>Business &amp; Growth</span></div>
+            <span class="cat-item-count">180+ Mentors</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Category Preview Card -->
+        <div class="matrix-display-card" id="matrixDisplayCard">
+          <div class="matrix-display-header">
+            <div>
+              <span class="section-head-kicker" id="matrixKicker">Domain Spotlight</span>
+              <h3 id="matrixTitle">Programming &amp; Tech</h3>
+            </div>
+            <span class="badge bg-primary" id="matrixActiveCount">420 Active Peers</span>
+          </div>
+
+          <p style="color:var(--text-soft); font-size:0.95rem; margin:0;" id="matrixDesc">
+            From algorithmic problem-solving to full-stack production apps, trade software engineering skills for design, language fluency, or executive communication.
+          </p>
+
+          <div>
+            <span style="display:block; font-size:0.82rem; font-weight:700; color:var(--text-strong); margin-bottom:0.5rem;">Popular Skills In This Category</span>
+            <div class="matrix-skill-chips" id="matrixChips">
+              <span class="matrix-skill-chip">Python 3</span>
+              <span class="matrix-skill-chip">TypeScript</span>
+              <span class="matrix-skill-chip">React &amp; Next.js</span>
+              <span class="matrix-skill-chip">Machine Learning</span>
+              <span class="matrix-skill-chip">SQL &amp; Postgres</span>
+              <span class="matrix-skill-chip">Docker &amp; DevOps</span>
+            </div>
+          </div>
+
+          <!-- Sample Peer Rows -->
+          <div class="matrix-sample-peers" id="matrixSamplePeers">
+            <div class="sample-peer-row">
+              <div class="sample-peer-info">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&q=80" alt="Elena">
+                <div>
+                  <strong style="color:var(--text-strong); font-size:0.88rem;">Elena V.</strong>
+                  <div class="sample-peer-skills">Teaches: React, Next.js • Wants: UI/UX Wireframing</div>
+                </div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm open-auth-trigger">Connect</button>
+            </div>
+            <div class="sample-peer-row">
+              <div class="sample-peer-info">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" alt="Marcus">
+                <div>
+                  <strong style="color:var(--text-strong); font-size:0.88rem;">Marcus T.</strong>
+                  <div class="sample-peer-skills">Teaches: Python, Fast-API • Wants: French Fluency</div>
+                </div>
+              </div>
+              <button class="btn btn-outline-primary btn-sm open-auth-trigger">Connect</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ SECTION 6: EDITORIAL HUMAN STORIES ============ -->
+  <section class="stories-section" id="stories">
+    <div class="container-wrap">
+      
+      <div class="story-editorial-split">
+        
+        <div class="story-image-composition">
+          <img src="./images/collaborate_story.jpg" alt="Creators collaborating" class="story-main-img">
+          <div class="story-floating-quote-badge">
+            <p>“We started as strangers trading design for code. Today, our co-created product is live and running.”</p>
+            <strong>— Maya &amp; Sophia, SkillSwap Members</strong>
+          </div>
+        </div>
+
+        <div class="story-copy-column">
+          <span class="section-tag">Member Spotlight</span>
+          <h2 class="story-headline">“I learned full-stack web development without paying a single dollar in course fees.”</h2>
+          <p class="story-lead">
+            Sarah, a brand strategist from Toronto, exchanged 18 weekly coaching sessions on positioning and copywriting with Leo, a senior backend engineer in Berlin.
+          </p>
+
+          <div class="story-exchange-breakdown">
+            <div class="story-pillar">
+              <small>Sarah Taught</small>
+              <strong>Brand Strategy &amp; Pitch Decks</strong>
+            </div>
+            <div class="story-pillar">
+              <small>Sarah Mastered</small>
+              <strong>Full-Stack JavaScript &amp; APIs</strong>
+            </div>
+          </div>
+
+          <div style="margin-top:0.6rem;">
+            <button class="btn btn-primary btn-lg open-auth-trigger">
+              <i class="fas fa-sparkles"></i> Begin Your Swap Story
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ STORIES MARQUEE (infinite, hover-pause) ============ -->
+  <section class="stories-marquee-section">
+    <div class="container-wrap">
+      <div class="features-head reveal">
+        <span class="section-tag">Member Voices</span>
+        <h2 class="section-title">Real swaps, real breakthroughs</h2>
+      </div>
+    </div>
+    <div class="marquee" id="storiesMarquee" style="--marquee-dur:52s;">
+      <div class="marquee__track">
+        <!-- set A -->
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Traded my Python skills for UI/UX mentoring. Shipped my first design system in a month.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">EV</span><span><strong>Elena V.</strong><small>Python ⇄ UI/UX</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>I taught French and finally learned jazz improvisation. Zero fees, pure value exchange.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">SR</span><span><strong>Sofia R.</strong><small>French ⇄ Jazz</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>The video calls feel native. Screen-sharing code reviews with my swap partner is effortless.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">MT</span><span><strong>Marcus T.</strong><small>Backend ⇄ Spanish</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Matched in minutes with someone whose goals mirrored mine. It just clicked.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">PS</span><span><strong>Priya S.</strong><small>Data ⇄ Growth</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Learned full-stack development without paying a single dollar in course fees.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">SC</span><span><strong>Sarah C.</strong><small>Brand ⇄ Full-Stack</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Photography for marketing strategy. Both our portfolios grew — together.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">KT</span><span><strong>Kenji T.</strong><small>Photo ⇄ Marketing</small></span></figcaption>
+        </figure>
+        <!-- set B (duplicate for seamless loop) -->
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Traded my Python skills for UI/UX mentoring. Shipped my first design system in a month.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">EV</span><span><strong>Elena V.</strong><small>Python ⇄ UI/UX</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>I taught French and finally learned jazz improvisation. Zero fees, pure value exchange.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">SR</span><span><strong>Sofia R.</strong><small>French ⇄ Jazz</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>The video calls feel native. Screen-sharing code reviews with my swap partner is effortless.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">MT</span><span><strong>Marcus T.</strong><small>Backend ⇄ Spanish</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Matched in minutes with someone whose goals mirrored mine. It just clicked.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">PS</span><span><strong>Priya S.</strong><small>Data ⇄ Growth</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Learned full-stack development without paying a single dollar in course fees.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">SC</span><span><strong>Sarah C.</strong><small>Brand ⇄ Full-Stack</small></span></figcaption>
+        </figure>
+        <figure class="story-quote-card" aria-hidden="true">
+          <div class="sq-stars">★★★★★</div>
+          <blockquote>Photography for marketing strategy. Both our portfolios grew — together.</blockquote>
+          <figcaption><span class="avatar-initials avatar-40">KT</span><span><strong>Kenji T.</strong><small>Photo ⇄ Marketing</small></span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq-section" id="faq">
+    <div class="container-wrap">
+      <div class="features-head reveal">
+        <span class="section-tag">Questions</span>
+        <h2 class="section-title">Frequently asked questions</h2>
+        <p class="section-sub">Everything you need to know before your first swap.</p>
+      </div>
+
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>What exactly is LearnX / SkillSwap?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">A free peer-to-peer platform where you teach a skill you know in exchange for learning one you want — knowledge is the only currency.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How does skill swapping work?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">List what you can teach and what you want to learn. We match you with complementary partners, you send a swap request, connect, and meet over chat and video.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is it really free?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">Yes. There are no fees, no subscriptions, and no course prices. You trade time and expertise, not money.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I find the right people?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">Browse skill categories, search by name or skill, or use your personalized recommendations based on what you want to learn.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What can I teach?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">Anything you're good at — programming, design, music, languages, business, photography and more. Add skills with a level and category to your profile.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do requests, chat and video calls work?<i class="fas fa-plus"></i></summary>
+          <div class="faq-answer">Send a swap request; once accepted you can message in real time, share files and images, and jump into a built-in HD video call with screen sharing.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="contact-section" id="contact">
+    <div class="container-wrap">
+      <div class="contact-shell reveal">
+        <div class="contact-intro">
+          <span class="section-tag">Get in touch</span>
+          <h2 class="section-title">Have a question? We're listening.</h2>
+          <p class="section-sub">Send us a message and our team will get back to you soon.</p>
+          <ul class="contact-points">
+            <li><i class="fas fa-circle-check"></i> Friendly human support</li>
+            <li><i class="fas fa-circle-check"></i> Feedback shapes the roadmap</li>
+            <li><i class="fas fa-circle-check"></i> Partnership &amp; press welcome</li>
+          </ul>
+        </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input type="text" class="form-control" id="contactName" placeholder="Jane Doe" required>
+            <div class="error-message" id="contactNameError"></div>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email Address</label>
+            <input type="email" class="form-control" id="contactEmail" placeholder="you@example.com" required>
+            <div class="error-message" id="contactEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="contactMessage">Message</label>
+            <textarea class="form-control" id="contactMessage" rows="4" placeholder="How can we help?" required></textarea>
+            <div class="error-message" id="contactMessageError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit" id="contactSubmitBtn">
+            <span class="btn-label">Send Message</span>
+          </button>
+          <div class="contact-success" id="contactSuccess" hidden>
+            <span class="contact-success-ico"><i class="fas fa-circle-check"></i></span>
+            <div><strong>Message sent!</strong><br>My team will get back to you soon.</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 7: CINEMATIC FINALE CTA ============ -->
+  <section class="finale-cta-section">
+    <div class="container-wrap">
+      <div class="finale-cta-stage">
+        <div class="finale-ambient-light"></div>
+        <h2 class="finale-headline">Never pay to learn again.<br>Teach what you love.</h2>
+        <p class="finale-subtext">Join thousands of engineers, designers, musicians, and polyglots unlocking real-world mastery through peer trade.</p>
+        
+        <div class="finale-actions">
+          <button class="btn btn-accent btn-lg" id="ctaGetStartedBtn">
+            <i class="fas fa-user-plus"></i> Claim Your Free Membership
+          </button>
+          <a class="btn btn-outline-primary btn-lg" href="#showcase" style="border-color:rgba(255,255,255,0.3); color:#fff;">
+            <i class="fas fa-arrows-rotate"></i> Replay Showcase
+          </a>
+        </div>
+
+        <div class="finale-stat-pills">
+          <div class="f-stat-item"><i class="fas fa-check-circle"></i> 100% Free Forever</div>
+          <div class="f-stat-item"><i class="fas fa-check-circle"></i> Verified Human Community</div>
+          <div class="f-stat-item"><i class="fas fa-check-circle"></i> In-Browser Video Included</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SECTION 8: EDITORIAL MONOLITHIC FOOTER ============ -->
+  <footer class="footer-monolithic">
+    <div class="container-wrap">
+      
+      <div class="footer-watermark">SKILLSWAP</div>
+
+      <div class="footer-minimal">
+        <a href="#showcase" class="brand">
+          <span class="brand-logo"><i class="fas fa-arrows-rotate"></i></span>
+          Skill<span>Swap</span>
+        </a>
+        <p class="footer-bio">Learn by teaching. Trade knowledge, not money.</p>
+        <div class="footer-social-row">
+          <a href="https://github.com" target="_blank" rel="noopener" class="social-circle-btn" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-circle-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span class="footer-copy">© 2026 SkillSwap · Made for lifelong learners.</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============ AUTHENTICATION MODALS ============ -->
+  <!-- Sign In -->
+  <div class="modal-overlay" id="signInModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Welcome Back</h3>
+        <button class="modal-close" id="closeSignInModal">&times;</button>
+      </div>
+      <p class="modal-sub">Sign in to resume your learning exchanges.</p>
+      <div class="modal-body">
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="you@example.com" required>
+            <div class="error-message" id="loginEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+              <button type="button" class="pw-toggle" data-pw="loginPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="error-message" id="loginPasswordError"></div>
+          </div>
+          <div class="form-row">
+            <label><input type="checkbox" id="rememberMe"> Keep me signed in</label>
+            <a href="#" id="forgotPasswordLink">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Sign In to SkillSwap</button>
+          <p class="form-footer">New to SkillSwap? <a href="#" id="switchToSignUp">Create an account</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign Up -->
+  <div class="modal-overlay" id="signUpModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Create Account</h3>
+        <button class="modal-close" id="closeSignUpModal">&times;</button>
+      </div>
+      <p class="modal-sub">Join thousands trading knowledge across the globe.</p>
+      <div class="modal-body">
+        <form id="signupForm" novalidate>
+          <div class="form-group">
+            <label for="signupEmail">Email Address</label>
+            <input type="email" class="form-control" id="signupEmail" placeholder="you@gmail.com" required>
+            <div class="error-message" id="signupEmailError"></div>
+          </div>
+          <div class="form-group">
+            <label for="signupPhone">Phone Number</label>
+            <input type="tel" class="form-control" id="signupPhone" placeholder="10-digit mobile number" required>
+            <div class="error-message" id="signupPhoneError"></div>
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="signupPassword" placeholder="Minimum 6 characters" required>
+              <button type="button" class="pw-toggle" data-pw="signupPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="error-message" id="signupPasswordError"></div>
+          </div>
+          <div class="form-group">
+            <label for="signupConfirmPassword">Confirm Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Repeat password" required>
+              <button type="button" class="pw-toggle" data-pw="signupConfirmPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="error-message" id="signupConfirmPasswordError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Create My Account</button>
+          <p class="form-footer">Already a member? <a href="#" id="switchToSignIn">Sign in here</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- OTP Verification -->
+  <div class="modal-overlay" id="otpModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Verify Email</h3>
+        <button class="modal-close" id="closeOtpModal">&times;</button>
+      </div>
+      <p class="modal-sub">Enter the 6-digit authentication code sent to your email.</p>
+      <div class="modal-body">
+        <form id="otpForm" novalidate>
+          <div class="form-group">
+            <label for="otpInput">6-Digit Code</label>
+            <input type="text" maxlength="6" class="form-control otp-input" id="otpInput" placeholder="••••••" required>
+            <div class="error-message" id="otpError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Verify &amp; Continue</button>
+          <p class="form-footer">Didn't receive the email? <a href="#" id="resendOtpLink">Resend verification</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forgot Password -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Reset Password</h3>
+        <button class="modal-close" id="closeForgotPasswordModal">&times;</button>
+      </div>
+      <p class="modal-sub">We will email you a secure 6-digit recovery code.</p>
+      <div class="modal-body">
+        <form id="forgotPasswordForm" novalidate>
+          <div class="form-group">
+            <label for="forgotPasswordEmail">Account Email</label>
+            <input type="email" class="form-control" id="forgotPasswordEmail" placeholder="you@example.com" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Send Recovery Code</button>
+          <p class="form-footer"><a href="#" id="backToSignInLink">Back to Sign In</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset Password -->
+  <div class="modal-overlay" id="resetPasswordModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title">Choose New Password</h3>
+        <button class="modal-close" id="closeResetPasswordModal">&times;</button>
+      </div>
+      <p class="modal-sub">Enter your reset code and set your new password.</p>
+      <div class="modal-body">
+        <form id="resetPasswordForm" novalidate>
+          <div class="form-group">
+            <label for="resetOtpInput">Reset Code</label>
+            <input type="text" maxlength="6" class="form-control otp-input" id="resetOtpInput" placeholder="••••••" required>
+          </div>
+          <div class="form-group">
+            <label for="resetNewPassword">New Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="resetNewPassword" placeholder="New secure password" required>
+              <button type="button" class="pw-toggle" data-pw="resetNewPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="error-message" id="resetNewPasswordError"></div>
+          </div>
+          <div class="form-group">
+            <label for="resetConfirmPassword">Confirm New Password</label>
+            <div class="pw-wrap">
+              <input type="password" class="form-control" id="resetConfirmPassword" placeholder="Re-enter new password" required>
+              <button type="button" class="pw-toggle" data-pw="resetConfirmPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="error-message" id="resetConfirmPasswordError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">Save New Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="./config.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/script.js"></script>
+</body>
+</html>

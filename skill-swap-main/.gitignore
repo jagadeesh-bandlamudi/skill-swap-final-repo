@@ -1,0 +1,27 @@
+# ---- Regenerable / temporary files only ----
+
+# Dependencies (reinstall with: npm install)
+node_modules/
+**/node_modules/
+
+# Local database fallback (auto-generated at runtime)
+backend/.localdb/
+
+# User-uploaded files (created at runtime — profile pics & chat attachments)
+backend/routes/uploads/*
+!backend/routes/uploads/.gitkeep
+
+# Stale .env backups (the real .env IS committed for direct-run)
+backend/.env.save
+backend/.env.save.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
