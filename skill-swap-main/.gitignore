@@ -11,9 +11,10 @@ backend/.localdb/
 backend/routes/uploads/*
 !backend/routes/uploads/.gitkeep
 
-# Stale .env backups (the real .env IS committed for direct-run)
-backend/.env.save
-backend/.env.save.*
+# Environment variables — never commit secrets
+backend/.env
+backend/.env.*
+!backend/.env.example
 
 # Logs
 *.log
