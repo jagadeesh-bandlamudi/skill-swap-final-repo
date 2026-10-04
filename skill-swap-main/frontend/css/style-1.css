@@ -2350,6 +2350,11 @@
 }
 
 .otp-input {
+  /* Fit inside the modal: a text input otherwise sizes itself to
+     ~20 characters of this wide, letter-spaced font and overflows. */
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   font-family: var(--font-head);
   letter-spacing: 0.4em;
   font-size: 1.5rem;
