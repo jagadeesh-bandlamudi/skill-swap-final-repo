@@ -1,32 +1,50 @@
-const nodemailer = require('nodemailer');
-
 const sendEmail = async (options) => {
-    // 1. Create a transporter object using SMTP transport
-    const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST, // For Gmail: 'smtp.gmail.com'
-        port: process.env.EMAIL_PORT, // For Gmail with TLS: 587
-        secure: false, // false for TLS
-        auth: {
-            user: process.env.EMAIL_USERNAME, // Your full Gmail address
-            pass: process.env.EMAIL_PASSWORD  // Your 16-character App Password
+    try {
+        const response = await fetch(
+            "https://api.brevo.com/v3/smtp/email",
+            {
+                method: "POST",
+                headers: {
+                    "api-key": process.env.BREVO_API_KEY,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    sender: {
+                        name: "SkillSwap Support",
+                        email: process.env.BREVO_SENDER_EMAIL
+                    },
+
+                    to: [
+                        {
+                            email: options.email
+                        }
+                    ],
+
+                    subject: options.subject,
+
+                    textContent: options.message,
+
+                    htmlContent: options.html || options.message
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const error = await response.text();
+
+            console.error("Brevo API Error:", error);
+
+            throw new Error(
+                `Email sending failed: ${response.status}`
+            );
         }
-    });
 
-    // 2. Define the email options
-    const mailOptions = {
-        from: 'SkillSwap Support <your-email@gmail.com>',
-        to: options.email,
-        subject: options.subject,
-        text: options.message,
-        html: options.html
-    };
+        console.log("Email sent successfully through Brevo API");
 
-
-    if (options.message && !options.text) {
-        mailOptions.text = options.message;
+    } catch (error) {
+        console.error("Send Email Error:", error);
+        throw error;
     }
-    // 3. Send the email
-    await transporter.sendMail(mailOptions);
 };
 
 module.exports = sendEmail;
