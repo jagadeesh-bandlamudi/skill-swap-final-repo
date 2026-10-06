@@ -1094,6 +1094,9 @@ body {
   height: 100%;
   padding: 0 !important;
   background: var(--surface-inset);
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 #chatHeader {
@@ -1105,6 +1108,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#chatHeader > div {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#chatHeader .d-flex.align-items-center:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+#chatHeader .d-flex.align-items-center:first-child > div {
+  min-width: 0;
+  overflow: hidden;
 }
 
 #chatHeader h5 {
@@ -1112,6 +1133,16 @@ body {
   font-size: 1.1rem;
   font-family: var(--font-head);
   font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#chatHeader small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #chatHeader img {
@@ -1120,17 +1151,26 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border);
+  flex-shrink: 0;
 }
 
 .chat-header-actions {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.chat-header-actions .btn-icon {
+  flex-shrink: 0;
 }
 
 #chatMessages {
   flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   height: auto !important;
   padding: 1.5rem !important;
   background:
@@ -1150,6 +1190,8 @@ body {
   line-height: 1.45;
   box-shadow: var(--shadow-xs);
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
   position: relative;
 }
 
@@ -1210,10 +1252,14 @@ body {
   display: flex;
   align-items: flex-end;
   gap: 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .chat-composer .msg-field {
   flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
@@ -1222,6 +1268,7 @@ body {
   border-radius: var(--r-pill);
   padding: 0.4rem 0.5rem 0.4rem 1.2rem;
   transition: all var(--t);
+  overflow: hidden;
 }
 
 .chat-composer .msg-field:focus-within {
@@ -1232,6 +1279,8 @@ body {
 
 #messageInput {
   flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
   border: none !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -1241,6 +1290,7 @@ body {
   color: var(--text);
   line-height: 1.4;
   font-size: 0.93rem;
+  box-sizing: border-box;
 }
 
 #messageInput:focus {
@@ -1307,8 +1357,17 @@ body {
   padding: 0.45rem 0.85rem;
   font-size: 0.84rem;
   font-weight: 600;
-  max-width: max-content;
+  max-width: calc(100% - 2.5rem);
+  box-sizing: border-box;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.file-chip #fileChipName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
 }
 
 .file-chip.show {
@@ -1869,7 +1928,12 @@ body {
     max-width: none;
   }
   #messagesSection .container-fluid {
-    height: calc(100vh - var(--nav-h) - 2rem);
+    height: calc(100vh - var(--nav-h) - 1.5rem);
+  }
+  @supports (height: 100dvh) {
+    #messagesSection .container-fluid {
+      height: calc(100dvh - var(--nav-h) - 1.5rem);
+    }
   }
   #messagesSection #chatSidebar {
     position: absolute;
@@ -1882,12 +1946,14 @@ body {
   }
   #messagesSection #chatWindow {
     display: none;
+    width: 100%;
+    max-width: 100%;
   }
   #messagesSection.chat-open #chatWindow {
     display: flex;
   }
   .chat-bubble {
-    max-width: 84%;
+    max-width: 86%;
   }
   #smallVideo {
     width: 130px;
@@ -1902,15 +1968,76 @@ body {
 
 @media (max-width: 576px) {
   .app-main .content-container {
-    padding: 1rem 0.85rem;
+    padding: 0.75rem 0.5rem;
   }
   .summary-grid {
     grid-template-columns: 1fr;
   }
-  .call-ctrl,
+  .call-ctrl {
+    width: 42px;
+    height: 42px;
+  }
+  #chatHeader {
+    padding: 0.75rem 0.75rem !important;
+    min-height: 60px;
+  }
+  #chatHeader img {
+    width: 38px;
+    height: 38px;
+  }
+  #chatHeader h5 {
+    font-size: 1rem;
+  }
+  #chatMessages {
+    padding: 1rem 0.75rem !important;
+  }
+  .chat-composer {
+    padding: 0.6rem 0.65rem !important;
+    gap: 0.5rem;
+  }
+  .chat-composer .msg-field {
+    padding: 0.35rem 0.5rem 0.35rem 0.85rem;
+  }
+  #messageInput {
+    font-size: 16px;
+  }
+  .attach-btn,
+  .composer-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
   .send-btn {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
+  }
+  .file-chip {
+    margin: 0 0.65rem 0.25rem;
+    max-width: calc(100% - 1.3rem);
+  }
+}
+
+@media (max-width: 360px) {
+  #chatHeader {
+    padding: 0.6rem 0.5rem !important;
+  }
+  .chat-composer {
+    padding: 0.5rem 0.4rem !important;
+    gap: 0.35rem;
+  }
+  .attach-btn,
+  .composer-icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+  .send-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 0.95rem;
+  }
+  .file-chip {
+    margin: 0 0.4rem 0.25rem;
+    max-width: calc(100% - 0.8rem);
   }
 }
 
