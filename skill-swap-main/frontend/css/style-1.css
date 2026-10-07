@@ -2275,6 +2275,14 @@
   margin-bottom: 0.4rem;
 }
 
+/* Auth modal inputs: one shared width. Previously no rule set a width, so
+   plain inputs sized to their content (~196px) while password inputs were
+   wider (~225px) because of their extra right padding for the eye icon.
+   :where() keeps specificity at .form-control level so .otp-input still wins. */
+:where(.modal-body) .form-control {
+  width: min(14.51rem, 100%);
+}
+
 .pw-wrap {
   position: relative;
   display: flex;
