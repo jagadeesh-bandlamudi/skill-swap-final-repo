@@ -1059,8 +1059,27 @@
           <div class="form-group">
             <label for="signupPassword">Password</label>
             <div class="pw-wrap">
-              <input type="password" class="form-control" id="signupPassword" placeholder="Minimum 6 characters" required>
+              <input type="password" class="form-control" id="signupPassword" placeholder="Create password (min. 8 chars)" required autocomplete="new-password">
               <button type="button" class="pw-toggle" data-pw="signupPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="password-strength-container" id="signupStrengthContainer" style="display: none;">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="signupStrengthFill"></div>
+              </div>
+              <div class="strength-label-text">
+                <span>Password Strength:</span>
+                <span class="strength-badge" id="signupStrengthBadge">Weak</span>
+              </div>
+            </div>
+            <div class="password-requirements" id="signupRequirements">
+              <div class="requirements-title"><i class="fas fa-shield-halved"></i> Password Requirements:</div>
+              <ul class="requirements-list">
+                <li data-rule="length"><i class="far fa-circle"></i> At least 8 characters</li>
+                <li data-rule="uppercase"><i class="far fa-circle"></i> At least one uppercase letter (A–Z)</li>
+                <li data-rule="lowercase"><i class="far fa-circle"></i> At least one lowercase letter (a–z)</li>
+                <li data-rule="number"><i class="far fa-circle"></i> At least one number (0–9)</li>
+                <li data-rule="special"><i class="far fa-circle"></i> At least one special character (@, #, $, !, %, etc.)</li>
+              </ul>
             </div>
             <div class="error-message" id="signupPasswordError"></div>
           </div>
@@ -1139,8 +1158,27 @@
           <div class="form-group">
             <label for="resetNewPassword">New Password</label>
             <div class="pw-wrap">
-              <input type="password" class="form-control" id="resetNewPassword" placeholder="New secure password" required>
+              <input type="password" class="form-control" id="resetNewPassword" placeholder="New secure password (min. 8 chars)" required autocomplete="new-password">
               <button type="button" class="pw-toggle" data-pw="resetNewPassword" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="password-strength-container" id="resetStrengthContainer" style="display: none;">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="resetStrengthFill"></div>
+              </div>
+              <div class="strength-label-text">
+                <span>Password Strength:</span>
+                <span class="strength-badge" id="resetStrengthBadge">Weak</span>
+              </div>
+            </div>
+            <div class="password-requirements" id="resetRequirements">
+              <div class="requirements-title"><i class="fas fa-shield-halved"></i> Password Requirements:</div>
+              <ul class="requirements-list">
+                <li data-rule="length"><i class="far fa-circle"></i> At least 8 characters</li>
+                <li data-rule="uppercase"><i class="far fa-circle"></i> At least one uppercase letter (A–Z)</li>
+                <li data-rule="lowercase"><i class="far fa-circle"></i> At least one lowercase letter (a–z)</li>
+                <li data-rule="number"><i class="far fa-circle"></i> At least one number (0–9)</li>
+                <li data-rule="special"><i class="far fa-circle"></i> At least one special character (@, #, $, !, %, etc.)</li>
+              </ul>
             </div>
             <div class="error-message" id="resetNewPasswordError"></div>
           </div>
@@ -1161,6 +1199,7 @@
   <!-- ============ SCRIPTS ============ -->
   <script src="./config.js"></script>
   <script src="./js/ui.js"></script>
+  <script src="./js/password-validator.js"></script>
   <script src="./js/script.js"></script>
 </body>
 </html>

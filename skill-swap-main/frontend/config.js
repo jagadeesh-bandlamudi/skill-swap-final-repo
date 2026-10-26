@@ -15,4 +15,8 @@
 // port-agnostic — run the server on any PORT (e.g. 5001 if macOS AirPlay is
 // holding 5000) and the frontend, API, Socket.IO and WebRTC all follow.
 // ============================================================
-const API_BASE_URL = 'https://skill-swap-final-repo.onrender.com';
+const API_BASE_URL = (typeof window !== 'undefined' &&
+  window.location &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
+    ? window.location.origin
+    : 'https://skill-swap-final-repo.onrender.com';

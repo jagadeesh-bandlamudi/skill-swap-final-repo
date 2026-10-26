@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const sendEmail = require('../utils/sendEmail')
+const { validatePassword } = require('../utils/passwordValidator');
 
 // Create a secret for JWT
 require('dotenv').config();
@@ -58,6 +59,19 @@ const JWT_SECRET = process.env.JWT_SECRET || 'skillswap_dev_secret';
 // @route POST /api/auth/signup
 router.post('/signup', async (req, res) => {
   const { email, password, phoneNumber } = req.body;
+
+  if (!password || typeof password !== 'string') {
+    return res.status(400).json({ msg: 'Password is required.' });
+  }
+
+  // Consistent password complexity validation
+  const passwordValidation = validatePassword(password);
+  if (!passwordValidation.isValid) {
+    return res.status(400).json({
+      msg: passwordValidation.errors[0] || 'Password does not meet all security requirements.',
+      errors: passwordValidation.errors
+    });
+  }
 
   try {
     let user = await User.findOne({ email });
@@ -164,9 +178,13 @@ router.post('/verify-otp', async (req, res) => {
 router.post('/signin', async (req, res) => {
   const { email, password } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ msg: 'Please provide both email and password.' });
+  }
+
   console.log("SIGNIN REQUEST");
   console.log("Email:", email);
-  console.log("Password received:", password);
+  console.log("Password received:", password ? "[PROVIDED]" : "[EMPTY]");
 
   try {
     let user = await User.findOne({ email });
@@ -279,10 +297,15 @@ router.post('/forgot-password', async (req, res) => {
             });
 
         } catch (emailError) {
-            console.error("Email sending error:", emailError);
-            // Be honest with the user: the code was NOT delivered.
-            return res.status(500).json({
-                msg: "We couldn't send the email right now. Please try again in a moment."
+            console.error("Email sending error:", emailError.message || emailError);
+            console.log('==================================================');
+            console.log(`📧  Email could not be sent. PASSWORD RESET CODE for ${user.email}:`);
+            console.log(`     >>>  ${otp}  <<<   (valid for 10 minutes)`);
+            console.log('==================================================');
+            return res.status(200).json({
+                msg: 'We could not send the email right now. Your recovery code has been printed in the server console — enter it to continue.',
+                email: user.email,
+                emailUnavailable: true
             });
         }
 
@@ -296,6 +319,19 @@ router.post('/forgot-password', async (req, res) => {
 // @desc    User submits OTP and new password
 router.post('/reset-password', async (req, res) => {
     const { email, otp, newPassword } = req.body;
+
+    if (!newPassword || typeof newPassword !== 'string') {
+        return res.status(400).json({ msg: 'New password is required.' });
+    }
+
+    // Consistent password complexity validation
+    const passwordValidation = validatePassword(newPassword);
+    if (!passwordValidation.isValid) {
+        return res.status(400).json({
+            msg: passwordValidation.errors[0] || 'Password does not meet all security requirements.',
+            errors: passwordValidation.errors
+        });
+    }
 
     try {
         // Find the user with the matching email, OTP, and ensure it's not expired

@@ -97,6 +97,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const isPassword = input.type === 'password';
         input.type = isPassword ? 'text' : 'password';
         toggle.innerHTML = isPassword ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+        const label = isPassword ? 'Hide password' : 'Show password';
+        toggle.setAttribute('aria-label', label);
+        toggle.setAttribute('title', label);
     });
 
     // Resend OTP friendly hint
@@ -634,6 +637,122 @@ document.addEventListener('DOMContentLoaded', function () {
             if (el) el.addEventListener('input', () => clearFieldError(i, e));
         });
 
+    // ========================================================
+    // LIVE PASSWORD VALIDATION & STRENGTH INDICATOR
+    // ========================================================
+
+    function setupPasswordValidation({
+        inputId,
+        strengthContainerId,
+        strengthFillId,
+        strengthBadgeId,
+        requirementsId,
+        confirmInputId,
+        confirmErrorId
+    }) {
+        const input = document.getElementById(inputId);
+        const strengthContainer = document.getElementById(strengthContainerId);
+        const strengthFill = document.getElementById(strengthFillId);
+        const strengthBadge = document.getElementById(strengthBadgeId);
+        const requirements = document.getElementById(requirementsId);
+        const confirmInput = confirmInputId ? document.getElementById(confirmInputId) : null;
+
+        if (!input) return;
+
+        function update() {
+            const val = input.value;
+            if (!window.PasswordValidator) return;
+            const result = window.PasswordValidator.validate(val);
+
+            // Requirements checklist live feedback
+            if (requirements) {
+                const items = requirements.querySelectorAll('.requirements-list li');
+                items.forEach(li => {
+                    const ruleId = li.getAttribute('data-rule');
+                    const icon = li.querySelector('i');
+                    const isMet = result.rules && result.rules[ruleId];
+                    if (isMet) {
+                        li.classList.add('rule-met');
+                        li.classList.remove('rule-failed');
+                        if (icon) icon.className = 'fas fa-circle-check';
+                    } else {
+                        li.classList.remove('rule-met');
+                        if (val.length > 0) {
+                            li.classList.add('rule-failed');
+                            if (icon) icon.className = 'fas fa-circle-xmark';
+                        } else {
+                            li.classList.remove('rule-failed');
+                            if (icon) icon.className = 'far fa-circle';
+                        }
+                    }
+                });
+            }
+
+            // Password strength bar and badge
+            if (strengthContainer && strengthFill && strengthBadge) {
+                if (val.length > 0) {
+                    strengthContainer.style.display = 'block';
+                    strengthFill.style.width = result.percentage + '%';
+                    strengthFill.className = 'strength-bar-fill fill-' + result.strengthClass;
+                    strengthBadge.textContent = result.strength;
+                    strengthBadge.className = 'strength-badge badge-' + result.strengthClass;
+                } else {
+                    strengthContainer.style.display = 'none';
+                    strengthFill.style.width = '0%';
+                    strengthFill.className = 'strength-bar-fill';
+                    strengthBadge.textContent = 'Weak';
+                    strengthBadge.className = 'strength-badge badge-weak';
+                }
+            }
+
+            // Live check if confirm password matches
+            if (confirmInput && confirmInput.value) {
+                if (confirmInput.value !== val) {
+                    setFieldError(confirmInputId, confirmErrorId, 'Passwords do not match.');
+                } else {
+                    clearFieldError(confirmInputId, confirmErrorId);
+                }
+            }
+        }
+
+        input.addEventListener('input', update);
+        input.addEventListener('focus', function () {
+            if (input.value.length > 0 && strengthContainer) {
+                strengthContainer.style.display = 'block';
+            }
+        });
+
+        if (confirmInput) {
+            confirmInput.addEventListener('input', function () {
+                if (confirmInput.value && input.value && confirmInput.value !== input.value) {
+                    setFieldError(confirmInputId, confirmErrorId, 'Passwords do not match.');
+                } else {
+                    clearFieldError(confirmInputId, confirmErrorId);
+                }
+            });
+        }
+    }
+
+    setupPasswordValidation({
+        inputId: 'signupPassword',
+        strengthContainerId: 'signupStrengthContainer',
+        strengthFillId: 'signupStrengthFill',
+        strengthBadgeId: 'signupStrengthBadge',
+        requirementsId: 'signupRequirements',
+        confirmInputId: 'signupConfirmPassword',
+        confirmErrorId: 'signupConfirmPasswordError'
+    });
+
+    setupPasswordValidation({
+        inputId: 'resetNewPassword',
+        strengthContainerId: 'resetStrengthContainer',
+        strengthFillId: 'resetStrengthFill',
+        strengthBadgeId: 'resetStrengthBadge',
+        requirementsId: 'resetRequirements',
+        confirmInputId: 'resetConfirmPassword',
+        confirmErrorId: 'resetConfirmPasswordError'
+    });
+
 
     // ========================================================
     // SIGNUP
@@ -675,8 +794,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!password) {
             setFieldError('signupPassword', 'signupPasswordError', 'Password is required.'); valid = false;
-        } else if (password.length < 6) {
-            setFieldError('signupPassword', 'signupPasswordError', 'Password must be at least 6 characters.'); valid = false;
+        } else if (window.PasswordValidator) {
+            const pv = window.PasswordValidator.validate(password);
+            if (!pv.isValid) {
+                setFieldError('signupPassword', 'signupPasswordError', pv.errors[0] || 'Password does not meet all requirements.'); valid = false;
+            }
+        } else if (password.length < 8) {
+            setFieldError('signupPassword', 'signupPasswordError', 'Password must be at least 8 characters.'); valid = false;
         }
 
         if (!confirmPassword) {
@@ -960,6 +1084,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const password =
             document.getElementById('loginPassword').value;
+
+        clearFieldError('loginEmail', 'loginEmailError');
+        clearFieldError('loginPassword', 'loginPasswordError');
+
+        let loginValid = true;
+        if (!email) {
+            setFieldError('loginEmail', 'loginEmailError', 'Email address is required.');
+            loginValid = false;
+        }
+        if (!password) {
+            setFieldError('loginPassword', 'loginPasswordError', 'Password is required.');
+            loginValid = false;
+        }
+        if (!loginValid) return;
 
 
         try {
@@ -1317,8 +1455,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 clearFieldError('resetConfirmPassword', 'resetConfirmPasswordError');
 
                 let resetValid = true;
-                if (!newPassword || newPassword.length < 6) {
-                    setFieldError('resetNewPassword', 'resetNewPasswordError', 'Password must be at least 6 characters.');
+                if (!newPassword) {
+                    setFieldError('resetNewPassword', 'resetNewPasswordError', 'New password is required.');
+                    resetValid = false;
+                } else if (window.PasswordValidator) {
+                    const pv = window.PasswordValidator.validate(newPassword);
+                    if (!pv.isValid) {
+                        setFieldError('resetNewPassword', 'resetNewPasswordError', pv.errors[0] || 'Password does not meet all requirements.');
+                        resetValid = false;
+                    }
+                } else if (newPassword.length < 8) {
+                    setFieldError('resetNewPassword', 'resetNewPasswordError', 'Password must be at least 8 characters.');
                     resetValid = false;
                 }
                 if (!confirmPassword) {
